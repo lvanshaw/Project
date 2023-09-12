@@ -1,0 +1,6 @@
+Speed Estimation of Vehicles with palte Detection work aguthu
+https://github.com/shreyapamecha/Speed-Estimation-of-Vehicles-with-Plate-Detection
+
+
+LicensePlateDetector WORKS for Licence Detection
+https://github.com/apoorva-dave/LicensePlateDetector

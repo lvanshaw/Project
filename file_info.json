@@ -1,0 +1,31 @@
+{
+  "syed": [
+    {
+      "username": "syed",
+      "filename": "syed2023-04-18 11:29:57",
+      "file": "car.png",
+      "description": "",
+      "priority": "high",
+      "processed": true,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": true,
+      "datetime": "2023-04-18 11:29:57",
+      "type": "image",
+      "detection": "MCLRNF1"
+    },
+    {
+      "username": "syed",
+      "filename": "syed2023-04-18 11:44:55",
+      "file": "demo.mp4",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-04-18 11:44:55",
+      "type": "video"
+    }
+  ]
+}

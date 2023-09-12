@@ -1,0 +1,30 @@
+{
+    "admin": {
+        "password": "admin",
+        "user_type": "admin"
+    },
+    "c": {
+        "password": "d",
+        "user_type": "regular"
+    },
+    "e": {
+        "password": "e",
+        "user_type": "regular"
+    },
+    "aa": {
+        "password": "a",
+        "user_type": "regular"
+    },
+    "Syr": {
+        "password": "1234",
+        "user_type": "regular"
+    },
+    "mca1078": {
+        "password": "a",
+        "user_type": "admin"
+    },
+    "syed": {
+        "password": "1234",
+        "user_type": "regular"
+    }
+}

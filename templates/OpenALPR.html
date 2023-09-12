@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenALPR - Automatic License Plate Recognition</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    integrity="sha384-xrRinNlDg3o93EpxpLW/8jGvLra1HXsE7VYjPjxO7IkuNP6YwU6rsG/JLrjgv1T+" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+</head>
+
+<body>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <header>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Indian Traffic Regulation</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">OpenALPR</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav> 
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1>Automatic License Plate Recognition</h1>
+            <p>OpenALPR is the leading automatic license plate recognition software for businesses, governments, and law
+              enforcement agencies.</p>
+            <button class="btn btn-primary">Try it now</button>
+          </div>
+          <div class="col-md-6">
+            <img src="{{url_for('static', filename='hero.jpg')}}" alt="Hero Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Features</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li>Real-time license plate recognition</li>
+              <li>High accuracy rate</li>
+              <li>Customizable rules and alerts</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li>Integration with existing security systems</li>
+              <li>Multiple cameras and lanes support</li>
+              <li>Cloud-based API for easy integration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Features</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li>Real-time license plate recognition</li>
+              <li>High accuracy rate</li>
+              <li>Customizable rules and alerts</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li>Integration with existing security systems</li>
+              <li>Multiple cameras and lanes support</li>
+              <li>Cloud-based API for easy integration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="pricing">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Pricing</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h3>Basic</h3>
+                <h4>$99/month</h4>
+                <ul>
+                  <li>Up to 500 license plate reads per month</li>
+                  <li>Real-time alerts</li>
+                  <li>Email support</li>
+                </ul>
+                <button class="btn btn-primary">Buy now</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h3>Pro</h3>
+                <h4>$249/month</h4>
+                <ul>
+                  <li>Up to 2500 license plate reads per month</li>
+                  <li>Real-time alerts</li>
+                  <li>Phone and email support</li>
+                </ul>
+                <button class="btn btn-primary">Buy now</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h3>Enterprise</h3>
+                <h4>Contact us</h4>
+                <ul>
+                  <li>Customized solution</li>
+                  <li>Unlimited license plate reads</li>
+                  <li>24/7 support</li>
+                </ul>
+                <button class="btn btn-primary">Contact us</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Contact Us</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <p>We're always happy to hear from you! Feel free to contact us with any questions or comments you may have
+              about our product.</p>
+            <p><i class="bi bi-geo-alt-fill"></i>123 Main St, Sivakasi TN</p>
+            <p><i class="bi bi-envelope-fill"></i>info@openalpr.com</p>
+            <p><i class="bi bi-phone-fill"></i>+91 8667341759</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>© 2023 OpenALPR. All rights reserved.</p>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-inline float-md-right">
+              <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+              <li class="list-inline-item"><a href="#">Terms of Use</a></li>
+              <li class="list-inline-item"><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+</body>
+
+</html>

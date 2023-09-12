@@ -1,0 +1,47 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 767px) {
+    .container {
+      margin-top: 100px;
+    }
+  }
+  
+  /* Apply these styles to all images in the document */
+img {
+  display: block; /* Set the display property to "block" to remove any extra whitespace */
+  max-width: 100%; /* Set a maximum width of 100% to prevent the image from exceeding its container */
+  height: auto; /* Set the height property to "auto" to maintain the aspect ratio */
+  margin: 0 auto; /* Center the image horizontally using "margin: 0 auto" */
+}
+
+/* Apply these styles specifically to the image in the "About" section */
+#about-section img {
+  width: 100%; /* Set the width to 100% to make it fill its container */
+  max-width: 500px; /* Set a maximum width of 500px to prevent the image from becoming too large */
+  margin-top: 20px; /* Add a margin to the top of the image */
+}
+
+/* Apply these styles specifically to the image in the "Services" section */
+#services-section img {
+  width: 100%; /* Set the width to 100% to make it fill its container */
+  max-width: 700px; /* Set a maximum width of 700px to prevent the image from becoming too large */
+  margin-bottom: 20px; /* Add a margin to the bottom of the image */
+}
+
+/* Apply these styles specifically to the image in the "Contact" section */
+#contact-section img {
+  width: 100%; /* Set the width to 100% to make it fill its container */
+  max-width: 400px; /* Set a maximum width of 400px to prevent the image from becoming too large */
+  margin-top: 20px; /* Add a margin to the top of the image */
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Tracker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Datetime</th>
+          <th>Filename</th>
+          <th>Filetype</th>
+          <th>Priority</th>
+          <th>Processed</th>
+          <th>Speed</th>
+          <th>Detection</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+
+    <script>
+      // Function to perform detection on a file
+      function detect(filename) {
+        $.ajax({
+          url: '/tracker/detect',
+          method: 'POST',
+          data: {'filename': filename},
+          success: function(response) {
+            console.log(response);
+            // Update the result cell for the file
+            $('td:contains(' + filename + ')').siblings('td:last').text(response.detection_result);
+          },
+          error: function(xhr, status, error) {
+            console.log(error);
+          }
+        });
+      }
+
+      // Function to perform speed analysis on a file
+      function speed(filename) {
+        $.ajax({
+          url: '/tracker/speed',
+          method: 'POST',
+          data: {'filename': filename},
+          success: function(response) {
+            console.log(response);
+            // Update the result cell for the file
+            $('td:contains(' + filename + ')').siblings('td:last').text(response.speed_result);
+          },
+          error: function(xhr, status, error) {
+            console.log(error);
+          }
+        });
+      }
+
+      // Get the file data and populate the table
+      $.getJSON("/tracker/data", function (data) {
+        $("#table-body").empty();
+        $.each(data, function (username, files) {
+          $.each(files, function (i, file) {
+            var row = $("<tr>");
+            row.append($("<td>").text(file.datetime));
+            row.append($("<td>").text(file.filename));
+            row.append($("<td>").text(file.filetype));
+            row.append($("<td>").text(file.priority));
+            row.append($("<td>").text(file.processed ? "Yes" : "No"));
+            // Create speed button
+            var speedBtn = $("<button>").addClass("btn btn-primary speed-btn").text("Speed");
+            if (file.speed_clicked) {
+              speedBtn.addClass("disabled");
+            }
+            row.append($("<td>").append(speedBtn));
+            
+            // Create detection button
+            var detectionBtn = $("<button>").addClass("btn btn-primary detection-btn").text("Detection");
+            if (file.detection_clicked) {
+              detectionBtn.addClass("disabled");
+            }
+            row.append($("<td>").append(detectionBtn));
+            
+            row.append($("<td>").text(file.result || ""));
+            $("#table-body").append(row);
+          });
+        });
+
+        // Attach click handlers to the speed and detection buttons
+        $('.speed-btn').click(function() {
+          var filename = $(this).closest('tr').find('td:nth-child(2)').text();
+          speed(filename);
+        });
+
+        $('.detection-btn').click(function() {
+          var filename = $(this).closest('tr').find('td:nth-child(2)').text();
+          detect(filename);
+        });
+      });
+    </script

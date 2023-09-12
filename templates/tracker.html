@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tracker Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+      integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='tracker.css') }}"
+    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link rel="icon" href="../static/img/security-camera.png" type="image/x-icon">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">OpenALPR</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" id="home" href="#">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" id="add" href="#">Add User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="data" href="#">Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="admin" href="#">Identification and Detection</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="addU" class="container d-none">
+      <h1>Welcome Admin!</h1>
+      <h2>Add User</h2>
+      <form method="post">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" name="username" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>User Type</label>
+          <select name="user_type" class="form-control">
+            <option value="regular">Regular</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div id="dataTable" class="container d-none">
+      <h1>JSON Data</h1>
+      <table id="json-table" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Filename</th>
+            <th>Datetime</th>
+            <th class="d-none">File</th>
+            <th>Type</th>
+            <th>Priority</th>
+            <th>Processed</th>
+            <th>Speed</th>
+            <th>Detection</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+    
+    <div id="adminU" class="container d-none">
+      <div class="container-fluid">
+        <center>
+          <h1 class="display-4">Vehicle Surveillance System</h1>
+          <a href="/speed" class="btn btn-primary btn-lg m-5">Speed Detection</a>
+          <a href="/uploader" class="btn btn-primary btn-lg m-5">Data Extraction</a>
+        </center> 
+      </div>
+      
+
+    </div>
+
+    <div id="content" class="container-fluid">
+      <!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Vehicle Identification and Speed Detection</h1>
+          <p class="lead">
+            Using the latest technology and state-of-the-art software, we can
+            identify vehicles and their speeds with accuracy and precision.
+            Contact us today to learn more!
+          </p>
+        </div>
+      </div>
+
+      <!-- About section -->
+      <section id="about-section">
+        <div class="row">
+          <div class="col-lg-6">
+            <img
+              class="img-fluid"
+              src="../data/car.png"
+              alt="Double Decker Bus"
+            />
+          </div>
+          <div class="col-lg-6">
+            <h2>About Us</h2>
+            <p>
+              We are a team of experts in vehicle identification and speed
+              detection. Our goal is to provide accurate and reliable services
+              to our clients.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services section -->
+      <section id="services-section">
+        <div class="row">
+          <div class="col-lg-6">
+            <h2>Our Services</h2>
+            <ul>
+              <li>Vehicle Identification</li>
+              <li>Speed Detection</li>
+              <li>Traffic Analysis</li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <img
+              class="img-fluid"
+              src="https://cdn.pixabay.com/photo/2015/09/02/13/09/traffic-918451_1280.jpg"
+              alt="Traffic"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact section -->
+      <section id="contact-section">
+        <div class="row">
+          <div class="col-lg-6">
+            <img
+              class="img-fluid"
+              src="https://cdn.pixabay.com/photo/2015/07/27/19/47/taxi-863302_1280.jpg"
+              alt="Taxi"
+            />
+          </div>
+          <div class="col-lg-6">
+            <h2>Contact Us</h2>
+            <form>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      $("#home").click(function (event) {
+        event.preventDefault();
+        $("#adminU").addClass("d-none");
+        $("#content").removeClass("d-none");
+        $("#addU").addClass("d-none");
+        $("#dataTable").addClass("d-none");
+        
+      });
+
+      $("#add").click(function () {
+        $("#addU").removeClass("d-none");
+        $("#dataTable").addClass("d-none");
+        $("#content").addClass("d-none");
+        $("#adminU").addClass("d-none");
+      });
+      $("#admin").click(function () {
+        $("#adminU").removeClass("d-none");
+        $("#dataTable").addClass("d-none");
+        $("#addU").addClass("d-none");
+        $("#content").addClass("d-none");
+      });
+      $
+    </script>
+    <script>
+      // $("#data").click(function () {
+      //   $("#addU").addClass("d-none");
+      //   $("#content").addClass("d-none");
+      //   $("#dataTable").removeClass("d-none");
+
+      //   $.getJSON("/tracker/data", function (data) {
+      //     $("#table-body").empty();
+      //     $.each(data, function (username, files) {
+      //       $.each(files, function (i, file) {
+      //         var row = $("<tr>");
+      //         row.append($("<td>").text(file.filename));
+      //         row.append($("<td>").text(file.datetime));
+      //         row.append($("<td>").text(file.file).hide());
+      //         //row.append($("<td>").text(file.file));
+      //         row.append($("<td>").text(file.filetype));
+      //         row.append($("<td>").text(file.priority));
+      //         row.append($("<td>").text(file.processed ? "Yes" : "No"));
+      //         // Create speed button
+      //         var speedBtn = $("<button>").addClass("btn btn-primary speed-btn").text("Speed");
+      //         if (file.speed_clicked) {
+      //           speedBtn.addClass("disabled");
+      //         }
+      //         row.append($("<td>").append(speedBtn));
+
+      //         // Create detection button
+      //         var detectionBtn = $("<button>").addClass("btn btn-primary detection-btn").text("Detection");
+      //         if (file.detection_clicked) {
+      //           detectionBtn.addClass("disabled");
+      //         }
+      //         row.append($("<td>").append(detectionBtn));
+
+      //         row.append($("<td>").text(file.result || ""));
+      //         $("#table-body").append(row);
+      //       });
+      //     });
+      //   });
+      // });
+
+      // Add click listener to speed button
+
+      $("#data").click(function () {
+        $("#addU").addClass("d-none");
+        $("#content").addClass("d-none");
+        $("#dataTable").removeClass("d-none");
+
+        $.getJSON("/tracker/data", function (data) {
+          $("#table-body").empty();
+          $.each(data, function (username, files) {
+            $.each(files, function (i, file) {
+              var row = $("<tr>");
+              row.append($("<td>").text(file.filename));
+              row.append($("<td>").text(file.datetime));
+              row.append($("<td>").text(file.file).hide());
+
+              // Check if the file type is image and hide the speed button
+              if (file.type === "image") {
+                row.append($("<td>").text(file.type));
+                row.append($("<td>").text(file.priority));
+                row.append($("<td>").text(file.processed ? "Yes" : "No"));
+                row.append($("<td>"));
+              } else {
+                row.append($("<td>").text(file.type));
+                row.append($("<td>").text(file.priority));
+                row.append($("<td>").text(file.processed ? "Yes" : "No"));
+                var speedBtn = $("<button>")
+                  .addClass("btn btn-primary speed-btn")
+                  .text("Speed");
+                if (file.speed_clicked) {
+                  speedBtn.addClass("disabled");
+                }
+                row.append($("<td>").append(speedBtn));
+              }
+
+              // Create detection button
+              var detectionBtn = $("<button>")
+                .addClass("btn btn-primary detection-btn")
+                .text("Detection");
+              if (file.detection_clicked) {
+                detectionBtn.addClass("disabled");
+              }
+              row.append($("<td>").append(detectionBtn));
+                row.append($("<td>").text("SPEED: "+file.speed +"\nDETECTION: "+file.detection ));
+              // row.append($("<td>").text(file.speed || ""))
+              //      .append($("<td>").text(file.detection || ""));
+              $("#table-body").append(row);
+
+              
+            });
+          });
+        });
+      });
+
+      $("#table-body").on("click", ".speed-btn", function () {
+        var row = $(this).closest("tr");
+        var filename = row.find("td:first-child").text();
+        var file = row.find("td:nth-child(3)").text();
+        // Send filename to server for processing
+        $.post(
+          "/tracker/process_speed",
+          { filename: filename, file: file},
+          function (data) {
+            //alert("Speed processing complete");
+            //row.find(".speed-btn").addClass("disabled");
+          }
+        );
+      });
+
+      // Add click listener to detection button
+      $("#table-body").on("click", ".detection-btn", function () {
+        var row = $(this).closest("tr");
+        var filename = row.find("td:first-child").text();
+        var file = row.find("td:nth-child(3)").text();
+        // Send filename to server for processing
+        $.post(
+          "/tracker/process_detection",
+          { filename: filename, file: file },
+          function (data) {
+            //window.location.reload();
+            alert("Detection processing complete");
+            window.location.href = "/tracker/data";
+            row.find(".detection-btn").addClass("disabled");
+          }
+        );
+      });
+    </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+      integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"
+      integrity="sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
+      integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </body>
+</html>

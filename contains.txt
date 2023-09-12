@@ -1,0 +1,329 @@
+1. create a dynamic web application using python the starting page is home where it has 2 button login and signup
+2. there are 2 type of users admin and regualar user there is a autherization it check through json where regualar user can't go to upload page only admin can request the page
+3. in signup the data are stored in json file
+4. login user moves to trackere page where it checks a data directory 
+5. regualr user moves to upload page where the page has upload button where the regualar user upload photo and video and save it in a local directory 
+
+
+create a web page with beautiful ui use bootstrap if necessary the web page is for government traffic
+regulation page it can have contents and other features and include 2 button for login and signup 
+
+
+1. create python web application in home page there is 2 buttons login and signup 
+while clicking signup it leads to signup page where its username and password 
+and type of user is he a admin or regular and store it in json page for login purpose 
+and give code for login authetication if the user is admin he can go to upload and tracker page 
+if user is regular he can't go to the page tracker and only go to upload page 
+
+2. after login with user admin it can move to upload page and tracker page 
+and after login with regular user it can move to upload page only not tracker page
+
+add trafic regulation contents in Upload page with beutiful UI 
+and add Images through links for safety purpose of vehicle traffic 
+
+give login.html for above web application, use full page with a beautiful UI using Bootstrap and responsive design and contents
+regarding indian vehicle traffic regulation and add images through links and add news where it shows latest vehicle traffic regulation 
+
+
+while detection button clicks it get the file and finds its vehicle plate number and store it in separate csv file, csv filename as filename which its processing which has fields username, filename, date, result(platenumber)
+
+
+create python web application where there is an upload page in that an user can upload an image or video and store it in data directory and save the information which user uploaded the video or image in json format which has keys like username, time, file name, data
+<!--
+  <!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form method="post">
+      <label>Username</label>
+      <input type="text" name="username" required>
+      <label>Password</label>
+      <input type="password" name="password" required>
+      <input type="submit" value="Login">
+    </form>
+  </body>
+</html>
+-->
+
+
+<!-- 
+from flask import Flask, render_template, request, redirect, url_for
+import os
+import json
+from datetime import datetime
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'data'
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        username = request.form['username']
+        file_type = file.filename.split('.')[-1]
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        filename = username + '_' + time + '.' + file_type
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        data = {
+            'username': username,
+            'time': time,
+            'filename': filename,
+            'filetype': file_type
+        }
+        save_data(data)
+        return redirect(url_for('index'))
+    return render_template('upload.html')
+
+def save_data(data):
+    with open('data.json', 'a') as f:
+        json.dump(data, f)
+        f.write('\n')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+-->
+
+# Signup page
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user_type = request.form['user_type']
+
+        users = load_users()
+
+        # Check if username already exists
+        if username in users:
+            return "Username already exists, please choose a different one."
+
+        # Add new user to users dictionary and save to JSON file
+        users[username] = {'password': password, 'user_type': user_type}
+        save_users(users)
+
+        return redirect(url_for('home'))
+    else:
+        return render_template('signup.html')
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      /* Additional CSS styles for the page */
+      body {
+        background-color: #f1f1f1;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      h1 {
+        color: #444444;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 36px;
+      }
+      form {
+        margin: auto;
+        width: 50%;
+        max-width: 500px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type="text"], input[type="file"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 20px 0 0 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      .info-container {
+        margin-top: 50px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      .info-container h2 {
+        color: #444444;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      .info-container p {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upload Image or Video</h1>
+    <form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+      <label>Username</label>
+      <input type="text" name="username" required>
+      <label>Select File</label>
+      <input type="file" name="file" required>
+      <input type="submit" value="Upload">
+    </form>
+    <div class="info-container">
+      <h2>Indian Traffic Regulations</h2>
+      <p>Driving in India can be an exciting and challenging experience, but it's important to be aware of the traffic regulations to ensure your safety and the safety of others. Here are a few key regulations to keep in mind:</p>
+      <ul>
+        <li>Drive on the left side of the road</li>
+        <li>Always wear a seatbelt while driving</li>
+        <li>Obey traffic signals and signs</li>
+        <li>Do not drink and drive</li>
+        <li>Use the horn only when necessary</li>
+      </ul>
+    </div>
+  </body>
+</html>
+
+
+
+from flask import Flask, render_template, request, redirect, url_for, session
+import os
+import datetime
+from datetime import datetime
+import json
+from werkzeug.utils import secure_filename
+app = Flask(__name__)
+app.secret_key = os.urandom(24)
+JSON_FILE = 'file_info.json'
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        users = load_users()
+
+        # Check if username and password are correct
+        if username in users and users[username]['password'] == password:
+            session['username'] = username
+            user_type = users[username]['user_type']
+            return redirect(url_for('upload') if user_type == 'regular' else 'tracker')
+        else:
+            return "Incorrect username or password, please try again."
+    else:
+        return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('home'))
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        file = request.files['file']
+        file_type = file.filename.split('.')[-1]
+        
+        description = request.form['description']
+
+        username = session['username']
+        time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        filename = secure_filename(file.filename)
+
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        data_path = os.path.join("/", 'data.json')
+        if os.path.exists(data_path):
+            with open(data_path, 'r') as f:
+                data = json.load(f)
+        else: data= {}
+        if username not in data:
+            data[username] = []
+        # Store information about the uploaded file in JSON format
+        data[username].append( {
+            'data': description,
+            'time': time,
+            'file_type': file_type,
+            'filename': filename
+        })
+
+        with open('file_info.json', 'w') as f:
+            json.dump(data, f, indent=4)
+
+        return render_template('upload.html', message='File uploaded successfully.')
+    else:
+        return render_template('upload.html')
+
+def load_users():
+    with open('users.json', 'r') as f:
+        return json.load(f)
+        
+def load_uploads():
+    with open(JSON_FILE) as f:
+        return json.load(f)
+
+if __name__ == '__main__':
+    app.config['UPLOAD_FOLDER'] = 'data'
+    app.run(debug=True)
+
+
+
+
+
+{
+  "c": [
+    {
+      "username": "c",
+      "filename": "c2023-04-08 10:32:37",
+      "file": "car6.jpg",
+      "filetype": "jpg",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-04-08 10:32:37"
+    },
+    {
+      "username": "c",
+      "filename": "c2023-04-08 10:32:51",
+      "file": "car.png",
+      "filetype": "png",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-04-08 10:32:51"
+    }
+  ]
+}

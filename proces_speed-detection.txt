@@ -1,0 +1,170 @@
+
+@app.route("/tracker/process_speed", methods=["POST"])
+def process_speed():
+    filename = request.form.get("filename")
+    # process the speed of cars in the video file
+    # ...
+    # update the JSON file with the new information
+    update_upload(filename, {"processed": True, "result": "speed: 80 km/h"})
+    return "Speed processing started"
+
+def process_video(filename):
+    # Code for processing video and detecting speed
+    return speed
+
+
+@app.route('/tracker/speed', methods=['POST'])
+def process_speed():
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+
+    uploads = load_uploads()
+
+    file = request.form['file']
+    for upload in uploads[username]:
+        if upload['filename'] == file:
+            upload['speed'] = True
+            speed = process_video(upload['filename'])
+            upload['result']['speed'] = speed
+            upload['processed'] = True
+            break
+
+    with open(JSON_FILE, 'w') as f:
+        json.dump(uploads, f, indent=2)
+
+    return redirect(url_for('tracker'))
+
+
+@app.route('/tracker/detection', methods=['POST'])
+def process_detection():
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+
+    uploads = load_uploads()
+
+    file = request.form['file']
+    for upload in uploads[username]:
+        if upload['filename'] == file:
+            upload['detection'] = True
+            # Code for processing video and detecting objects
+            objects = detect_objects(upload['filename'])
+            upload['result']['detection'] = objects
+            upload['processed'] = True
+            break
+
+    with open(JSON_FILE, 'w') as f:
+        json.dump(uploads, f, indent=2)
+
+    return redirect(url_for('tracker'))
+
+
+
+
+ <div id="dataTable" class="container d-none">
+    <h1>JSON Data</h1>
+    <table id="json-table" class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Datetime</th>
+          <th>Filename</th>
+          <th>Filetype</th>
+          <th>Priority</th>
+          <th>Processed</th>        
+          <th>Speed</th>
+          <th>Detection</th>  
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+<script>
+ $("#data").click(function () {
+      $("#addU").addClass("d-none");
+      $("#content").addClass("d-none");
+      $("#dataTable").removeClass("d-none");
+
+      $.getJSON("/tracker/data", function (data) {
+    $("#table-body").empty();
+    $.each(data, function (username, files) {
+        $.each(files, function (i, file) {
+            var row = $("<tr>");
+            row.append($("<td>").text(file.datetime));
+			      row.append($("<td>").text(file.filename));
+            row.append($("<td>").text(file.filetype));
+            row.append($("<td>").text(file.priority));
+            row.append($("<td>").text(file.processed ? "Yes" : "No"));
+            row.append($("<td>").text(file.speed_clicked ? "Clicked" : ""));
+            row.append($("<td>").text(file.detection_clicked ? "Clicked" : ""));
+            row.append($("<td>").text(file.result || ""));
+            $("#table-body").append(row);
+        });
+    });
+});
+</script>
+
+the code is for vehicle identification and speed detection, 
+speed and detection column has a button, when it clicked it process the file if its 
+image it finds its plate number 
+if its video it finds its speed of the cars and plate number
+
+
+
+
+{
+  "c": [
+    {
+      "username": "c",
+      "filename": "c2023-03-17 19:54:20",
+      "filetype": "jpg",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-03-17 19:54:20"
+    },
+    {
+      "username": "c",
+      "filename": "c2023-03-17 19:54:36",
+      "filetype": "jpg",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-03-17 19:54:36"
+    }
+  ],
+  "aa": [
+    {
+      "username": "aa",
+      "filename": "aa2023-03-17 19:54:53",
+      "filetype": "jpeg",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-03-17 19:54:53"
+    },
+    {
+      "username": "aa",
+      "filename": "aa2023-03-17 19:55:04",
+      "filetype": "jpg",
+      "description": "",
+      "priority": "high",
+      "processed": false,
+      "result": null,
+      "speed_clicked": false,
+      "detection_clicked": false,
+      "datetime": "2023-03-17 19:55:04"
+    }
+  ]
+}

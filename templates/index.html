@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Indian Traffic Regulation</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Indian Traffic Regulation</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Welcome to Indian Traffic Regulation</h1>
+          <p>
+            Learn about the rules and regulations for safe driving in India.
+          </p>
+          <a href="login.html" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+      <div class="row my-5">
+        <div class="col-md-6">
+          <h2>Traffic Regulations</h2>
+          <p>
+            India has one of the highest rates of road accidents in the world,
+            with more than 400 deaths occurring every day due to traffic
+            accidents. To address this issue, the Indian government has
+            implemented several traffic regulations to ensure the safety of all
+            road users.
+          </p>
+          <ul>
+            <li>Wearing a helmet is mandatory for two-wheeler riders and passengers.</li>
+            <li>Seat belts must be worn by drivers and passengers in four-wheelers.</li>
+            <li>Use of mobile phones while driving is prohibited.</li>
+            <li>Driving under the influence of alcohol or drugs is strictly prohibited.</li>
+            <li>Speed limits must be followed, especially in residential areas and near schools.</li>
+          </ul>
+          <h2>Penalties for Violating Traffic Regulations</h2>
+          <p>
+            Violating traffic regulations can result in fines, imprisonment, or both, depending on the severity of the offence. The penalties for some common traffic violations are as follows:
+          </p>
+          <ul>
+            <li>Driving without a license: Rs. 5000 fine and/or 3 months imprisonment.</li>
+            <li>Driving without insurance: Rs. 2000 fine.</li>
+            <li>Driving under the influence of alcohol or drugs: Rs. 10,000 fine and/or imprisonment for up to 6 months.</li>
+            <li>Speeding: Rs. 1000-2000 fine for the first offence, and Rs. 2000-4000 for subsequent offences.</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Learn More</a>
+        </div>
+        <div class="col-md-6">
+          <h2>Safety Tips</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel
+            ultricies augue. Mauris euismod malesuada enim non posuere. Integer
+            rutrum nibh eu sapien maximus, nec dignissim metus aliquet.
+          </p>
+          <a href="#" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>© 2023 Government Traffic Regulation. All rights reserved.</p>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-inline float-md-right">
+              <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+              <li class="list-inline-item"><a href="#">Terms of Use</a></li>
+              <li class="list-inline-item"><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
